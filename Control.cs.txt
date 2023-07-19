@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Control : MonoBehaviour
+{
+    public PlayerInput _playerInput;
+    private void Start()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+    }
+    private void Update()
+    {
+        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+        {
+            _playerInput.SwitchCurrentActionMap("Do");
+            Debug.Log("Action map: " + _playerInput.currentActionMap);
+        }
+        if (Gamepad.current.buttonWest.wasPressedThisFrame)
+        {
+            _playerInput.SwitchCurrentActionMap("Exploration");
+            Debug.Log("Action map: " + _playerInput.currentActionMap);
+        }
+    }
+    public void Do(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Debug.Log("Do");
+        }
+    }
+    public void Re(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Debug.Log("Re");
+        }
+    }
+
+}
